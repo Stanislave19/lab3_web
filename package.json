@@ -1,0 +1,24 @@
+{
+  "name": "lab3_web",
+  "version": "1.0.0",
+  "description": "Програма для роботи із замовленнями",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stanislave19/lab3_web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Stanislave19/lab3_web/issues"
+  },
+  "homepage": "https://github.com/Stanislave19/lab3_web#readme",
+  "dependencies": {
+    "commander": "^15.0.0"
+  }
+}
