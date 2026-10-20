@@ -51,6 +51,19 @@ program.configureHelp({
     .replace('[command]', '[команда]'),
 });
 
+program.configureOutput({
+  outputError: (message, write) => write(
+    message
+      .replace('error: unknown option', 'Помилка: невідома опція')
+      .replace('error: unknown command', 'Помилка: невідома команда')
+      .replace('error: missing required argument', "Помилка: не вказано обов'язковий аргумент")
+      .replace('error: option', 'Помилка: для опції')
+      .replace('argument missing', 'не вказано значення')
+      .replace(/error: too many arguments.*/, 'Помилка: забагато аргументів для цієї команди')
+      .replace('(Did you mean', '(Можливо, ви мали на увазі')
+  ),
+});
+
 program.helpCommand('help [command]', 'показати довідку для команди');
 
 program
