@@ -129,4 +129,18 @@ program
     });
   });
 
+program
+  .command('total')
+  .description('показати загальну суму замовлення з урахуванням знижок')
+  .action(() => {
+    const data = loadData(program.opts().file);
+    let total = 0;
+
+    for (const item of data.items) {
+      total += lineSum(item);
+    }
+
+    console.log(`Загальна сума: ${total.toFixed(2)} грн`);
+  });
+
 program.parse();
