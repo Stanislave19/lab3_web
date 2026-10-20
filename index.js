@@ -143,4 +143,35 @@ program
     console.log(`Загальна сума: ${total.toFixed(2)} грн`);
   });
 
+const deliveryMethods = {
+  nova_poshta: 'Нова пошта',
+  ukrposhta: 'Укрпошта',
+  courier: "кур'єр",
+};
+
+const paymentMethods = {
+  cash_on_delivery: 'накладений платіж',
+  card: 'картка',
+};
+
+program
+  .command('summary')
+  .description('показати зведення про доставку й оплату')
+  .action(() => {
+    const data = loadData(program.opts().file);
+    const delivery = data.delivery;
+
+    console.log('Доставка');
+    console.log(`  Місто: ${delivery.city}`);
+    console.log(`  Спосіб: ${deliveryMethods[delivery.method] ?? delivery.method}`);
+    if (delivery.office) {
+      console.log(`  Відділення: № ${delivery.office.number}, ${delivery.office.address}`);
+    }
+
+    console.log('Оплата');
+    console.log(`  Спосіб: ${paymentMethods[data.payment_method] ?? data.payment_method}`);
+    console.log(`  Оплачено: ${data.is_paid ? 'так' : 'ні'}`);
+    console.log(`  Промокод: ${data.promo_code ?? 'не застосовано'}`);
+  });
+
 program.parse();
