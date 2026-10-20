@@ -1,9 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { Command } from 'commander';
 
-const packageJson = JSON.parse(
-  readFileSync(new URL('./package.json', import.meta.url), 'utf8')
-);
+const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
 
 function fail(message) {
   console.error(`Помилка: ${message}`);
@@ -39,7 +37,6 @@ const helpTitles = {
   'Options:': 'Опції:',
   'Commands:': 'Команди:',
   'Arguments:': 'Аргументи:',
-  'Global Options:': 'Глобальні опції:',
 };
 
 program.configureHelp({
@@ -49,8 +46,27 @@ program.configureHelp({
     .replace('[command]', '[команда]'),
 });
 
-program.parse();
+program.helpCommand('help [command]', 'показати довідку для команди');
 
-// тимчасово, для перевірки
-const data = loadData(program.opts().file);
-console.log(data.order_id);
+program
+  .command('list')
+  .description('показати стислий список позицій замовлення')
+  .option('-l, --limit <number>', 'показати лише перші N позицій')
+  .action((options) => {
+    const data = loadData(program.opts().file);
+    let items = data.items;
+
+    if (options.limit) {
+      const limit = Number(options.limit);
+      if (!Number.isInteger(limit) || limit < 1) {
+        fail('значення --limit має бути цілим числом більшим за 0');
+      }
+      items = items.slice(0, limit);
+    }
+
+    items.forEach((item, index) => {
+      console.log(`${index + 1}. ${item.name}`);
+    });
+  });
+
+program.parse();
