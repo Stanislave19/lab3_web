@@ -23,6 +23,11 @@ function loadData(filePath) {
   }
 }
 
+function lineSum(item) {
+  const discount = item.discount ?? 0;
+  return item.price * item.count * (1 - discount / 100);
+}
+
 const program = new Command();
 
 program
@@ -100,6 +105,28 @@ program
     }
 
     console.log(JSON.stringify(value, null, 2));
+  });
+
+program
+  .command('items')
+  .description('показати позиції замовлення із сумою за кожну')
+  .option('-s, --sort', 'сортувати за сумою позиції')
+  .option('-d, --desc', 'сортувати у зворотному порядку')
+  .action((options) => {
+    const data = loadData(program.opts().file);
+    const items = data.items;
+
+    if (options.sort) {
+      items.sort((a, b) => lineSum(a) - lineSum(b));
+    }
+    if (options.desc) {
+      items.reverse();
+    }
+
+    items.forEach((item) => {
+      const discount = item.discount ?? 0;
+      console.log(`${item.name}: ${item.price} × ${item.count}, знижка ${discount}%, сума ${lineSum(item).toFixed(2)} грн`);
+    });
   });
 
 program.parse();
