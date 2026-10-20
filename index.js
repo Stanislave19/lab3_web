@@ -84,4 +84,22 @@ program
     console.log(JSON.stringify(item, null, 2));
   });
 
+program
+  .command('get')
+  .description('показати значення окремого поля, зокрема вкладеного')
+  .argument('<path>', 'шлях до поля через крапку, наприклад delivery.office.address або items.0.name')
+  .action((path) => {
+    const data = loadData(program.opts().file);
+    let value = data;
+
+    for (const key of path.split('.')) {
+      value = value?.[key];
+      if (value === undefined) {
+        fail(`поля «${path}» не існує`);
+      }
+    }
+
+    console.log(JSON.stringify(value, null, 2));
+  });
+
 program.parse();
