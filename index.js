@@ -69,4 +69,19 @@ program
     });
   });
 
+program
+  .command('item')
+  .description('показати одну позицію замовлення повністю')
+  .argument('<number>', 'номер позиції у списку, починаючи з 1')
+  .action((number) => {
+    const data = loadData(program.opts().file);
+    const item = data.items[Number(number) - 1];
+
+    if (!item) {
+      fail(`позицію «${number}» не знайдено, номер має бути від 1 до ${data.items.length}`);
+    }
+
+    console.log(JSON.stringify(item, null, 2));
+  });
+
 program.parse();
