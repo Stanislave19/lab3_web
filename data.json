@@ -6,26 +6,31 @@
   "payment_method": "cash_on_delivery",
   "promo_code": null,
   "items": [
-    { "name": "Seiko Lady SUR-42", 
-    "price": 5400, 
-    "count": 1, 
-    "discount": 10 },
-    { "name": "Casio Heritage MTP-1234", 
-    "price": 2400, 
-    "count": 1, 
-    "discount": null },
-    { "name": "Orient Bambino RA-AC0M", 
-    "price": 7800, 
-    "count": 1, 
-    "discount": null },
-    { "name": "Ремінець шкіряний 20 мм", 
-    "price": 450, 
-    "count": 2, 
-    "discount": 5 },
-    { "name": "Батарейка Renata 371", 
-    "price": 60, 
-    "count": 3, 
-    "discount": null }
+    { 
+      "name": "Seiko Lady SUR-42", 
+      "price": 5400, 
+      "count": 1, 
+      "discount": 10 },
+    { 
+      "name": "Casio Heritage MTP-1234", 
+      "price": 2400, 
+      "count": 1, 
+      "discount": null },
+    { 
+      "name": "Orient Bambino RA-AC0M", 
+      "price": 7800, 
+      "count": 1, 
+      "discount": null },
+    { 
+      "name": "Ремінець шкіряний 20 мм", 
+      "price": 450, 
+      "count": 2, 
+      "discount": 5 },
+    { 
+      "name": "Батарейка Renata 371", 
+      "price": 60, 
+      "count": 3, 
+      "discount": null }
   ],
   "customer": {
     "first_name": "Станіслав",
